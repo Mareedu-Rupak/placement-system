@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function LoginPage({ onLogin }) {
+export default function LoginPage({ onLogin, onRegister }) {
   const [role, setRole] = useState("student");
   const [formData, setFormData] = useState({ email: "", password: "", rollNumber: "" });
   const [error, setError] = useState("");
@@ -134,7 +134,10 @@ export default function LoginPage({ onLogin }) {
 
           <p style={{ marginTop: "16px", textAlign: "center", color: "#64748b", fontSize: "13px" }}>
             New student?{" "}
-            <span style={{ color: "#818cf8", cursor: "pointer", fontWeight: "600" }}>
+            <span
+              style={{ color: "#818cf8", cursor: "pointer", fontWeight: "600" }}
+              onClick={() => onRegister && onRegister()}
+            >
               Register here →
             </span>
           </p>

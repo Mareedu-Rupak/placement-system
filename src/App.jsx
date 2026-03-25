@@ -1,14 +1,15 @@
 import { useState } from "react"
 import LoginPage from "./pages/auth/LoginPage"
 import RegisterPage from "./pages/auth/RegisterPage"
+import StudentDashboard from "./pages/student/StudentDashboard"
 
 function App() {
   const [user, setUser] = useState(null)
-  const [page, setPage] = useState("login") // "login" or "register"
+  const [page, setPage] = useState("login")
 
   return (
     <div>
-      {page === "login" && (
+      {page === "login" && !user && (
         <LoginPage
           onLogin={(u) => setUser(u)}
           onRegister={() => setPage("register")}
@@ -23,10 +24,15 @@ function App() {
           onBack={() => setPage("login")}
         />
       )}
-      {user && (
+      {user && user.role === "student" && (
+        <StudentDashboard
+          user={user}
+          onLogout={() => setUser(null)}
+        />
+      )}
+      {user && user.role === "officer" && (
         <div style={{ color: "white", padding: "40px", background: "#0f172a", minHeight: "100vh" }}>
-          <h1>Welcome, {user.name}! ✅</h1>
-          <p>Role: {user.role}</p>
+          <h1>Officer Dashboard — Coming Soon! 🏢</h1>
           <button onClick={() => setUser(null)}>Logout</button>
         </div>
       )}

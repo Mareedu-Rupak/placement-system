@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Leaderboard from "./Leaderboard";
 
 const mockStudent = {
   name: "Priya Sharma",
@@ -33,6 +34,7 @@ export default function StudentDashboard({ user, onLogout }) {
             { id: "coding", icon: "💻", label: "Coding Stats" },
             { id: "skills", icon: "🎯", label: "My Skills" },
             { id: "profile", icon: "👤", label: "Profile" },
+            { id: "leaderboard", icon: "🏆", label: "Leaderboard" },
           ].map((item) => (
             <button
               key={item.id}
@@ -63,6 +65,7 @@ export default function StudentDashboard({ user, onLogout }) {
               {activeTab === "coding" && "Coding Stats"}
               {activeTab === "skills" && "My Skills"}
               {activeTab === "profile" && "Profile"}
+              {activeTab === "leaderboard" && "Leaderboard"}
             </h1>
             <p style={styles.pageSubtitle}>Welcome back, {mockStudent.name}! 👋</p>
           </div>
@@ -74,7 +77,6 @@ export default function StudentDashboard({ user, onLogout }) {
         {/* OVERVIEW TAB */}
         {activeTab === "overview" && (
           <div>
-            {/* Stats Cards */}
             <div style={styles.statsGrid}>
               <div style={styles.statCard}>
                 <div style={styles.statIcon}>💻</div>
@@ -104,7 +106,6 @@ export default function StudentDashboard({ user, onLogout }) {
               </div>
             </div>
 
-            {/* Progress Bars */}
             <div style={styles.card}>
               <h3 style={styles.cardTitle}>LeetCode Progress</h3>
               <div style={styles.progressList}>
@@ -134,7 +135,6 @@ export default function StudentDashboard({ user, onLogout }) {
               </div>
             </div>
 
-            {/* Skills Preview */}
             <div style={styles.card}>
               <h3 style={styles.cardTitle}>My Skills</h3>
               <div style={styles.skillsRow}>
@@ -150,7 +150,6 @@ export default function StudentDashboard({ user, onLogout }) {
         {activeTab === "coding" && (
           <div>
             <div style={styles.codingGrid}>
-              {/* LeetCode Card */}
               <div style={styles.platformCard}>
                 <div style={styles.platformHeader}>
                   <span style={{ fontSize: "28px" }}>⚡</span>
@@ -181,7 +180,6 @@ export default function StudentDashboard({ user, onLogout }) {
                 </div>
               </div>
 
-              {/* GFG Card */}
               <div style={styles.platformCard}>
                 <div style={styles.platformHeader}>
                   <span style={{ fontSize: "28px" }}>🟢</span>
@@ -268,6 +266,14 @@ export default function StudentDashboard({ user, onLogout }) {
               ))}
             </div>
           </div>
+        )}
+
+        {/* LEADERBOARD TAB */}
+        {activeTab === "leaderboard" && (
+          <Leaderboard
+            currentUser={user}
+            onBack={() => setActiveTab("overview")}
+          />
         )}
       </div>
     </div>
